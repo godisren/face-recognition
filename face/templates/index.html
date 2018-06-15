@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Face Recognition{% endblock %}
+{% block content %}  
+  <form action="{{url_for('mainflow.step01')}}" method="post">
+    <input type="text" name="name" placeholder="please input your name" required>
+    <input type="submit" value="start...">
+  </form>
+  <hr>
+  <h3>enrivoment variable:</h3>
+  <ul>
+  {% for key, value in data.configs.get_all_configs().items() %} 
+    <li>{{key}} : {{value}}</li>
+  {% endfor %}
+  </ul>
+  <hr>
+  <h3>recognition test</h3>
+  <form action="{{url_for('recognize.upload')}}" enctype="multipart/form-data" method="post" target="_blank">
+    who am i ? <br>
+    <input type="file" name="file" required>
+    <input type="submit" value="upload and see result">
+  </form> 
+  <ul>
+  {% for f in data.faces %}    
+    <li>
+    <a href="{{url_for('mainflow.step03', name=f)}}">{{f}}</a> 
+    (<a href="javascript:void(0);" class="user_del" data-user="{{f}}">delete</a>)
+    </li>
+  {% endfor %}
+</ul>
+
+<form id="del_form" action="{{url_for('mainflow.delete')}}" method="post">
+  <input type="hidden" name="name">
+</form>
+
+<script>
+  $(function() {
+        $(".user_del").click(function(){
+            if(!confirm("are you sure to delete the user ?"))
+              return;
+
+            user_name = $(this).data("user");
+            
+            $form = $("#del_form");
+            $form.find("input[name='name']").val(user_name);
+            $form.submit();
+        });
+    });
+</script>
+
+{% endblock %}

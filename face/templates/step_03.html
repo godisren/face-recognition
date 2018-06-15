@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Step 3 - Detetion{% endblock %}
+{% block content %}
+Hi <b>{{ data['name'] }}</b>, now we can detect your faces<br>
+<a href="/">done</a><br>
+<img src="{{ url_for('recognize.camera', name=data['name'])}}" width="500">
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Step 2 - Training{% endblock %}
+{% block content %}
+Hi <b>{{ data['name'] }}</b>, it is ready to train your faces<br>
+<input name="trainBtn" type="button" value="train">
+<br>
+<br>
+
+<script>
+    $(function() {
+        $("input[name='trainBtn']").click(function(){
+            $.ajax({
+                url: "{{ url_for('train.execute', name=data['name'])}}",
+                success: function( result ) {
+                    window.location.href = "{{url_for('mainflow.step03', name=data['name'])}}"
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

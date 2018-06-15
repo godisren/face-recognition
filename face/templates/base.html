@@ -1,0 +1,17 @@
+<!doctype html>
+<title>Face Recognition</title>
+<script
+			  src="https://code.jquery.com/jquery-3.3.1.js"
+			  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+			  crossorigin="anonymous"></script>
+<section class="content">
+  <header>
+  <h1>Face Recognition</h1>
+  <hr>
+  </header>
+  {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+  {% endfor %}  
+  <h3>{% block title %}{% endblock %}</h3>
+  <div>{% block content %}{% endblock %}</div>
+</section>

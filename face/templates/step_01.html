@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Step 1 - Sampling{% endblock %}
+{% block content %}
+Hi <b>{{ data['name'] }}</b>, for now it is sampling your faces<br>
+it will take some pictures for next training step<br>
+<form action="{{url_for('mainflow.step02')}}" method="post">
+    <input type="hidden" name="name" value="{{ data['name'] }}">
+    <input type="submit" value="next">
+</form>
+
+<img src="{{ url_for('sample.camera', name=data['name']) }}" width="400">
+
+{% endblock %}
